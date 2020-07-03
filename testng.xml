@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <listeners>
+    <listener class-name="Simpo_V2.Simpo.Listeners"/>
+    
+  </listeners>
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="Simpo_V2.Simpo.Login"/>
+      <class name="Simpo_V2.Simpo.MakeOrder"></class>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
