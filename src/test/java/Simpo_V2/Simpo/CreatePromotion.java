@@ -56,15 +56,18 @@ public class CreatePromotion extends base {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click()",PR.AddButton());
 
+        PR.Title().sendKeys("Automation"+prop.getProperty("SignUpBusinessEmail"));
+        PR.TextArea().sendKeys("This promotion was created by selenium automation script");
+        PR.Discount().sendKeys("10");
+
+
+
         Calendar cal = Calendar.getInstance();
         int DayOfMonth=cal.get(Calendar.DAY_OF_MONTH);
         String FormatedDay= Integer.toString(DayOfMonth);
-
         WebElement StartDate = driver.findElement(By.xpath("(//input[@name='date'])[1]"));
         StartDate.click();
-
         WebElement FirstCalender = driver.findElement(By.cssSelector("div.mx-calendar-content tbody"));
-
         List<WebElement> columns = FirstCalender.findElements(By.tagName("td"));
 
         for(WebElement date :columns){
@@ -193,15 +196,34 @@ public class CreatePromotion extends base {
                         Seconddate.click();
                         check=true;
                         break;
-
                     }
-
                 }
+            }
+        }
+        WebElement PublishDate = driver.findElement(By.xpath("(//input[@name='date'])[3]"));
+        PublishDate.click();
+        WebElement PublishCalender = driver.findElement(By.cssSelector("html>body>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>table:nth-of-type(3)>tbody"));
+        List<WebElement> PublishColumns = PublishCalender.findElements(By.tagName("td"));
+        Thread.sleep(900);
+        WebElement PublishCalender2 = driver.findElement(By.cssSelector("html>body>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>table:nth-of-type(3)>tbody"));
+        List<WebElement> PublishColumns2 = PublishCalender2.findElements(By.tagName("td"));
 
+        for(WebElement Pubdate :PublishColumns2){
+            String days = Pubdate.getAttribute("data-day");
+            if(FormatedDay.equals(days)){
+                Thread.sleep(500);
+                Pubdate.click();
+                break;
             }
 
-
         }
+
+        PR.PromotionCode().sendKeys("Automation"+prop.getProperty("SignUpBusinessEmail"));
+        PR.SelectFile().sendKeys(System.getProperty("user.dir")+"\\resources\\productimage.jpg");
+        Thread.sleep(1000);
+        PR.SaveButton().click();
+
     }
+
   
 }
