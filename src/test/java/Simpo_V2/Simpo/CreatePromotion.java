@@ -14,6 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -32,7 +33,7 @@ public class CreatePromotion extends base {
     public WebDriver driver;
     private static Logger log = LogManager.getLogger(CreatePromotion.class.getName());
     @Test
-    public void LoginToWebSite() throws IOException, InterruptedException {
+    public void CreatePromotion() throws IOException, InterruptedException {
         prop = new Properties();
         fis= new FileInputStream(System.getProperty("user.dir")+"\\resources\\data.properties");
         prop.load(fis);
@@ -66,7 +67,9 @@ public class CreatePromotion extends base {
         int DayOfMonth=cal.get(Calendar.DAY_OF_MONTH);
         String FormatedDay= Integer.toString(DayOfMonth);
         WebElement StartDate = driver.findElement(By.xpath("(//input[@name='date'])[1]"));
-        StartDate.click();
+        Thread.sleep(200);
+        WebElement StartDate2 = driver.findElement(By.xpath("(//input[@name='date'])[1]"));
+        StartDate2.click();
         WebElement FirstCalender = driver.findElement(By.cssSelector("div.mx-calendar-content tbody"));
         List<WebElement> columns = FirstCalender.findElements(By.tagName("td"));
 
@@ -217,10 +220,15 @@ public class CreatePromotion extends base {
             }
 
         }
-
-        PR.PromotionCode().sendKeys("Automation"+prop.getProperty("SignUpBusinessEmail"));
+        String Promotion = "Automation"+prop.getProperty("SignUpBusinessEmail");
+        PR.PromotionCode().sendKeys(Promotion);
         PR.SelectFile().sendKeys(System.getProperty("user.dir")+"\\resources\\productimage.jpg");
         Thread.sleep(1000);
+        FileOutputStream out;
+        out = new FileOutputStream(System.getProperty("user.dir") + "\\resources\\data.properties");
+        prop.setProperty("Promotion", String.valueOf(Promotion));
+        prop.store(out, null);
+        log.info("Updated promotion in properties file");
         PR.SaveButton().click();
 
     }

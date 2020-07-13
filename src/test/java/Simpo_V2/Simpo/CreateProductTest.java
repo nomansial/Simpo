@@ -24,7 +24,7 @@ public class CreateProductTest extends base {
     public WebDriver driver;
     private static Logger log = LogManager.getLogger(CreateProductTest.class.getName());
     @Test
-    public void LoginToWebSite() throws IOException, InterruptedException {
+    public void CreateProduct() throws IOException, InterruptedException {
         prop = new Properties();
         fis= new FileInputStream(System.getProperty("user.dir")+"\\resources\\data.properties");
         prop.load(fis);

@@ -13,13 +13,16 @@ public class Dashboard {
     By PlaceOrder = new By.ByXPath("(//button[contains(@class,'btn btn-primary')])[1]");
     By AddProduct = new By.ByXPath("(//button[@type='button'])[4]");
     By SupplierDropDown = new By.ByXPath("(//div[@class='multiselect__select'])[1]");
-    By SupplierName = new By.ByXPath("//span[text()='AAAAAA']");
+    By SupplierName = new By.ByCssSelector("");
     By ProductDropDown = new By.ByXPath("(//div[@class='multiselect__tags'])[2]");
     By SelectProduct = new By.ByXPath("//span[text()='Samsung Refrigerator']");
     By Add = new By.ByXPath("(//button[contains(@class,'btn btn-primary')])[5]");
     By Place = new By.ByXPath("(//button[contains(@class,'btn btn-primary')])[4]");
     By Confirm = new By.ByXPath("(//button[contains(@class,'btn btn-primary')])[5]");
     By ConfirmPopUp = new By.ByXPath("(//button[text()='Yes'])[3]");
+    By PromotionButton = new By.ByXPath("(//button[@class='btn btn-primary'])[2]");
+    By PromotionText = new By.ById("promo_code_0");
+    By ApplyButton = new By.ByXPath("(//button[contains(@class,'btn btn-primary')])[4]");
 
     public Dashboard(WebDriver driver) {
 
@@ -37,9 +40,9 @@ public class Dashboard {
     public WebElement SupplierDropDown(){
         return  driver.findElement(SupplierDropDown);
     }
-    public  WebElement SupplierName(){
-        return  driver.findElement(SupplierName);
-    }
+    //public  WebElement SupplierName(){
+       // return  driver.findElement(SupplierName);
+   // }
     public  WebElement ProductDropDown(){
         return driver.findElement(ProductDropDown);
     }
@@ -57,5 +60,14 @@ public class Dashboard {
     }
     public WebElement ConfirmPopUp(){
         return driver.findElement(ConfirmPopUp);
+    }
+    public WebElement PromotionButton(){
+        return driver.findElement(PromotionButton);
+    }
+    public WebElement PromotionText(){
+        return driver.findElement(PromotionText);
+    }
+    public WebElement ApplyButton(){
+        return driver.findElement(ApplyButton);
     }
 }

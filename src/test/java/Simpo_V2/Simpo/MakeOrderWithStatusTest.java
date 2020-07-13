@@ -4,28 +4,28 @@ import PageObjects.Dashboard;
 import PageObjects.LandingPage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 
-public class MakeOrder extends base {
+public class MakeOrderWithStatusTest extends base {
     Properties prop;
     FileInputStream fis;
 
-    private static Logger log = LogManager.getLogger(MakeOrder.class.getName());
+    private static Logger log = LogManager.getLogger(MakeOrderWithStatusTest.class.getName());
     @Test
-    public void CreateOrder() throws IOException, InterruptedException {
+    public void CreateOrderWithStatus() throws IOException, InterruptedException {
         prop = new Properties();
         fis= new FileInputStream(System.getProperty("user.dir")+"\\resources\\data.properties");
         prop.load(fis);
@@ -52,8 +52,13 @@ public class MakeOrder extends base {
         log.info("Clicked on Add Product Button");
         wait.until(ExpectedConditions.visibilityOf(DB.SupplierDropDown())).click();
         log.info("Clicked onS Supplier DropDown");
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"name\"]")).sendKeys("AAAAAA");
+        Thread.sleep(2500);
+        driver.findElement(By.xpath("//*[@id=\"name\"]")).sendKeys(Keys.RETURN);
         //wait.until(ExpectedConditions.visibilityOf(DB.SupplierName())).click();
         log.info("Selecting Supplier AAAAAA");
+        Thread.sleep(2500);
         wait.until(ExpectedConditions.visibilityOf(DB.ProductDropDown())).click();
         log.info("Clicked Product Dropdown");
         wait.until(ExpectedConditions.visibilityOf(DB.SelectProduct())).click();
@@ -68,10 +73,8 @@ public class MakeOrder extends base {
         log.info("Clicked on Confirm Order Button");
         wait.until(ExpectedConditions.visibilityOf(DB.ConfirmPopUp())).click();
         log.info("Order Created Successfully");
+
     }
-    @AfterTest
-    public void tearDown(){
-        driver.quit();
-    }
+
 
 }
